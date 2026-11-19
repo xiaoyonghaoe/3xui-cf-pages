@@ -16,10 +16,14 @@
 
 ## Cloudflare Pages 部署步骤（GitHub 自动部署）
 
+> [!IMPORTANT]
+> **注意不要点成 Worker（Workers Builds）**：Cloudflare 控制台新建应用时默认卡片是创建 Worker（会显示 `npx wrangler deploy` 部署命令并导致失败）。请务必点击页面底部的 **Pages** 入口创建！
+> 仓库刻意将 `wrangler.toml` 保留为 `wrangler.toml.example`，以确保你可以在 Cloudflare 网页控制台自由点选绑定 `SUB_KV` 和环境变量而不会被锁定。
+
 1. 在 Cloudflare Dashboard → **Storage & Databases → Workers KV** 创建一个 KV Namespace（例如命名为 `3xui-sub-kv`）。
-2. 进入 **Workers & Pages → Create → Pages → Connect to Git**，选择你的 `3xui-cf-pages` GitHub 仓库：
-   - **Build command**：留空（纯原生静态资源 + Pages Functions，无需构建）
-   - **Build output directory**：`public`
+2. 进入 **Workers & Pages → Create application → 拉到最底部点击「Looking to deploy Pages? Get started」→ Connect to Git**，选择你的 `3xui-cf-pages` GitHub 仓库：
+   - **Build command（构建命令）**：留空
+   - **Build output directory（构建输出目录）**：`public`
 3. 部署后进入该 Pages 项目的 **Settings → Functions → KV namespace bindings**：
    - Variable name：`SUB_KV`
    - KV namespace：选择第 1 步创建的 `3xui-sub-kv`
@@ -27,7 +31,7 @@
    - `PUBLIC_DOMAIN`：你的自定义 CF 域名（如 `https://sub.example.com`）
    - `SUB_PREFIX`：订阅路径前缀（默认空，即 `/<subId>`；填 `s` 则为 `/s/<subId>`）
    - `ENABLE_EXT_ROUTING`：`true` / `false`
-5. 在 **Custom domains** 绑定你自己的域名即可（建议绑定自定义域名，避免 `pages.dev` 在部分地区被干扰）。
+5. 在 **Custom domains** 绑定你自己的域名即可（绑定或修改环境变量后，在 Deployments 点一次 **Retry deployment** 使新绑定生效）。
 
 ## 本地测试
 
