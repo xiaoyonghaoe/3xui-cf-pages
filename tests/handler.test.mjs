@@ -73,6 +73,10 @@ test('browser request renders HTML with publicDomain and traffic info', async ()
   assert.match(body, /https:\/\/cf\.example\.com/);
   assert.match(body, /Alice Plan/);
   assert.match(body, /abc12345xyz/);
+  assert.match(body, /<style>/);
+  assert.match(body, /formatBytes/);
+  assert.doesNotMatch(body, /\/assets\/style\.css/);
+  assert.doesNotMatch(body, /\/assets\/app\.js/);
 });
 
 test('v2rayN UA returns base64 raw payload and Subscription-Userinfo header', async () => {

@@ -99,7 +99,8 @@
     document.getElementById('synced-at').textContent = `同步于 ${sdt.toLocaleString('zh-CN')}`;
   }
 
-  const baseOrigin = (data.publicDomain || window.location.origin).replace(/\/+$/, '');
+  const rawDomain = String(data.publicDomain || window.location.origin).trim().replace(/\/+$/, '');
+  const baseOrigin = /^https?:\/\//i.test(rawDomain) ? rawDomain : `https://${rawDomain}`;
   const prefix = (data.subPrefix || '').replace(/^\/+|\/+$/g, '');
   const subPath = prefix ? `/${prefix}/${data.subId}` : `/${data.subId}`;
   const subUrl = `${baseOrigin}${subPath}`;
