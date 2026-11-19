@@ -1,0 +1,18 @@
+{
+  "prepend_rules": [
+    "DOMAIN-SUFFIX,openai.com,PROXY",
+    "DOMAIN-SUFFIX,chatgpt.com,PROXY"
+  ],
+  "append_rules": [
+    "DOMAIN-SUFFIX,example.internal,DIRECT"
+  ],
+  "rule_providers": {
+    "custom_direct": {
+      "type": "http",
+      "behavior": "domain",
+      "url": "https://your-cf-domain.example/rules/custom-direct.yaml",
+      "path": "./ruleset/custom-direct.yaml",
+      "interval": 86400
+    }
+  }
+}

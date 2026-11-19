@@ -1,0 +1,16 @@
+{
+  "prepend_rules": [
+    {
+      "type": "field",
+      "domain": ["geosite:openai"],
+      "outboundTag": "proxy"
+    }
+  ],
+  "append_rules": [
+    {
+      "type": "field",
+      "ip": ["geoip:private"],
+      "outboundTag": "direct"
+    }
+  ]
+}

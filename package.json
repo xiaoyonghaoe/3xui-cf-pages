@@ -1,0 +1,9 @@
+{
+  "name": "3xui-cf-pages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/handler.test.mjs"
+  }
+}

@@ -1,0 +1,24 @@
+# Cloudflare wrangler configuration for 3xui-cf-pages
+# When deploying via Cloudflare Dashboard connected to GitHub:
+# 1. Set "Build output directory" to: public
+# 2. Bind a KV Namespace named "SUB_KV" in Settings -> Functions -> KV namespace bindings
+# 3. Optionally set environment variables: PUBLIC_DOMAIN, SUB_PREFIX, ENABLE_EXT_ROUTING
+
+name = "3xui-cf-pages"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "public"
+
+[vars]
+# Optional: override the public domain displayed in the HTML page & copy buttons (e.g. "https://sub.example.com")
+PUBLIC_DOMAIN = ""
+# Optional: URL path prefix before <subId>, e.g. "" for /<subId> or "s" for /s/<subId>
+SUB_PREFIX = ""
+# Enable merging extra routing rules stored in SUB_KV (routing:clash, routing:xray, etc.)
+ENABLE_EXT_ROUTING = "true"
+# Default profile update interval header (hours)
+PROFILE_UPDATE_INTERVAL = "12"
+
+# For local `wrangler pages dev` or CLI deploy, fill in your KV Namespace ID:
+# [[kv_namespaces]]
+# binding = "SUB_KV"
+# id = "YOUR_KV_NAMESPACE_ID"
